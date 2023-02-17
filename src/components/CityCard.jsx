@@ -7,14 +7,7 @@ export const CityCard = ({ data }) => {
   const dispatch = useDispatch();
 
   return (
-    <Row
-      className="mx-1 mb-2 p-3 align-items-center"
-      style={{
-        border: "1px solid #00000033",
-        borderRadius: 5,
-        backgroundColor: "white",
-      }}
-    >
+    <Row className="p-2 mx-0 align-items-center custCard">
       <Col xs={4}>
         <Link to={`/details/lat=${data.lat}&lon=${data.lon}`}>{data.name}</Link>
       </Col>

@@ -1,9 +1,12 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const CustomNavbar = () => {
+  const favLength = useSelector((state) => state.favourites.content.length);
+
   return (
     <Navbar style={{ backgroundColor: "#005986" }} expand="lg" variant="dark">
       <Container>
@@ -20,7 +23,7 @@ export const CustomNavbar = () => {
               Search
             </Link>
             <Link className="nav-link" to="/favourites">
-              Favourites
+              Favourites ({favLength})
             </Link>
           </Nav>
         </Navbar.Collapse>

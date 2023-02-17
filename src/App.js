@@ -9,9 +9,12 @@ import { CustomNavbar } from "./components/CustomNavbar";
 import { Home } from "./components/Home";
 
 function App() {
-  const fetchFunction = async (url, query, setResult) => {
+  const fetchFunction = async (baseUrl, searchType, query, setResult) => {
     try {
-      const res = await fetch(url + query);
+      const res = await fetch(
+        `${baseUrl}${searchType}?&units=metric&limit=5&appid=6f7b75831402626eb36d5abd608f5d51&` +
+          query
+      );
       if (res.ok) {
         const data = await res.json();
         setResult(data);

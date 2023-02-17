@@ -6,17 +6,18 @@ export const Search = (props) => {
   const [queryParam, setQueryParam] = useState("");
   const [cities, setCities] = useState(null);
 
-  const baseURL =
-    "http://api.openweathermap.org/geo/1.0/direct?&units=metric&limit=5&appid=6f7b75831402626eb36d5abd608f5d51&q=";
+  const baseURL = "http://api.openweathermap.org/geo/1.0/";
 
+  /*     direct?&units=metric&limit=5&appid=6f7b75831402626eb36d5abd608f5d51&q="
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.fetchFunction(baseURL, queryParam, setCities);
+    props.fetchFunction(baseURL, "direct", "&q=" + queryParam, setCities);
   };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     console.log(cities);
-  }, [cities]); */
+  }, [cities]);
 
   const handleChange = (e) => {
     setQueryParam(e.target.value);
@@ -43,30 +44,22 @@ export const Search = (props) => {
         </Col>
       </Row>
       {cities ? (
-        <Container>
-          <Row className="mt-1">
-            <Col xs={12}>
-              <Row className="mx-1 mt-2 p-1">
-                <Col xs={6}>
-                  <h4>City:</h4>
-                </Col>
-                <Col className="text-center" xs={4}>
-                  <h4 className="m-0">State:</h4>
-                </Col>
-                <Col className="text-center" xs={2}>
-                  <h4>Country:</h4>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Col xs={12}>
+        <Container className="px-1 mt-2 whiteBg">
+          <Col xs={12} className="searchList rounded-bottom">
             {cities.map((cities, i) => (
               <CityCard key={i} data={cities} />
             ))}
           </Col>
         </Container>
       ) : (
-        <></>
+        <Container className="px-1 py-2 mt-2 whiteBg">
+          <Col xs={12} className="searchList rounded-bottom text-center">
+            <h1 className="text-dark">
+              Sorry, could not find specified city :c
+            </h1>
+            <p>Check your spelling and try again</p>
+          </Col>
+        </Container>
       )}
     </Container>
   );
