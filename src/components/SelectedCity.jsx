@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Wind, Thermometer, Droplet, ArrowDown } from "react-bootstrap-icons";
-import img from "../picture.jpg";
-import { current } from "@reduxjs/toolkit";
 
 export const SelectedCity = (props) => {
   const [currentWeather, setCurrWeather] = useState();
@@ -14,8 +12,6 @@ export const SelectedCity = (props) => {
   const params = useParams();
   /* console.log(params.cityCoords); */
   const baseURL = "https://api.openweathermap.org/data/2.5/";
-
-  /* https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lon}&appid={API key} */
 
   useEffect(() => {
     props.fetchFunction(baseURL, "forecast?", params.cityCoords, setForecast);
@@ -31,36 +27,15 @@ export const SelectedCity = (props) => {
   }, [forecast]);
 
   useEffect(() => {
-    if (currentWeather) {
-      console.log(currentWeather);
-      const date = new Date();
-      const time = date.getHours();
-      const mins = date.getMinutes().toString();
-      setTime(time.toString() + ":" + mins);
-      /* console.log(fullTime); */
-
-      switch (true) {
-        case time >= 18:
-          setTimeImg(
-            `"https://media.istockphoto.com/photos/deep-space-background-picture-id178149253?b=1&k=20&m=178149253&s=612x612&w=0&h=jSfVvSlCbTGZSWrso8tcllsuCSO5A_YpPLFAPEByh0w="`
-          );
-          break;
-        case time >= 7:
-          setTimeImg(
-            `"https://media.istockphoto.com/id/1007768414/photo/blue-sky-with-bright-sun-and-clouds.jpg?s=612x612&w=0&k=20&c=MGd2-v42lNF7Ie6TtsYoKnohdCfOPFSPQt5XOz4uOy4="`
-          );
-          break;
-
-        default:
-          break;
-      }
-    }
+    props.timeImgFunction(currentWeather, time, setTime, setTimeImg);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentWeather]);
+
   return (
     <Container>
       {currentWeather ? (
         <Row
-          className="whiteBg my-4 text-light"
+          className="whiteBg my-5 text-light"
           style={{
             backgroundImage: `url(${timeImg})`,
             backgroundRepeat: "no-repeat",
@@ -223,7 +198,7 @@ export const SelectedCity = (props) => {
         </div>
       )}
       {forecast ? (
-        <Row className="whiteBg my-4 py-3">
+        <Row className="whiteBg my-4 py-3 daily">
           <Col xs={12}>
             {" "}
             <h3 className="text-center">Daily Forecast</h3>

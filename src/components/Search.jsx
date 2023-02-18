@@ -43,7 +43,9 @@ export const Search = (props) => {
           </Form>
         </Col>
       </Row>
-      {cities ? (
+      {cities === null ? (
+        ""
+      ) : cities.length > 0 ? (
         <Container className="px-1 mt-2 whiteBg">
           <Col xs={12} className="searchList rounded-bottom">
             {cities.map((cities, i) => (

@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import doge from "../doge.svg";
 
 export const CustomNavbar = () => {
   const favLength = useSelector((state) => state.favourites.content.length);
@@ -10,6 +11,13 @@ export const CustomNavbar = () => {
   return (
     <Navbar style={{ backgroundColor: "#005986" }} expand="lg" variant="dark">
       <Container>
+        <img
+          src={doge}
+          alt="logo"
+          id="logo"
+          className="me-2"
+          style={{ width: "36px", height: "36px" }}
+        ></img>
         <Link to="/" className="navbar-brand">
           DogeWeather
         </Link>

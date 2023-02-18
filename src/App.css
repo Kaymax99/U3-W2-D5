@@ -1,3 +1,12 @@
+* {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+}
+
+*:-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
 html,
 body {
   min-height: 100vh;
@@ -12,6 +21,15 @@ body {
     rgba(104, 175, 202, 1) 60%,
     rgba(216, 238, 238, 1) 95%
   );
+}
+
+nav {
+  background-color: #005986;
+}
+
+#logo {
+  background-color: white;
+  border-radius: 25px;
 }
 
 h1 {
@@ -40,4 +58,8 @@ input:focus {
 a {
   text-decoration: none;
   color: #2f96c6;
+}
+
+.daily {
+  margin-bottom: 5em !important;
 }
